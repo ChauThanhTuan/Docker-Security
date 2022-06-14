@@ -4,7 +4,7 @@ Docker giúp phân phối nhanh chóng, nhất quán các ứng dụng; cho phé
 
 Do đó, điều quan trọng là phải bảo vệ Docker Engine chống lại các mối đe dọa có thể xảy ra, đặc biệt nếu chúng ta đang chạy một máy chủ Docker trong sản xuất, thương mại.
 
-![Vulnerabilities](images/Vulnerabilities.png)
+![Vulnerabilities](Images/Vulnerabilities.png)
 
 Vậy cần phải làm gì để có môi trường Docker an toàn
 
@@ -47,37 +47,37 @@ Docker Bench scan Docker host để tìm các vấn đề cấu hình phổ bi�
 Sau khi scan, nó sẽ cung cấp điểm bảo mật. Quản trị viên có thể theo dõi điểm này để đánh dấu các cải tiến theo thời gian. Điểm số đó được tăng lên khi cấu hình Pass và ngược lại, nó sẽ giảm khi bị Warn, và điểm cao hơn rất có thể sẽ bảo mật tốt hơn.
 
 ## What needs to be secured?
-![Docker Bench for Security](images/DockerBench.png)
+![Docker Bench for Security](Images/DockerBench.png)
 
 ### 1. Host Configuration
 Phần này bao gồm các khuyến nghị bảo mật mà ta nên tuân theo để chuẩn bị cho máy host. Nó làm theo các phương pháp tốt nhất về bảo mật cơ sở hạ tầng để xây dựng một nền tảng vững chắc và an toàn để thực hiện các khối lượng công việc trên container.
 
 Phần này tập trung vào các điểm yếu trong quá trình kiểm tra bảo mật trên host. Nó sẽ kiểm tra các thư mục Docker, đảm bảo sử dụng phân vùng dành riêng cho containers và đảm bảo cài đặt phiên bản Docker cập nhật.
 
-![Host Configuration](images/HostConfiguration.png)
+![Host Configuration](Images/HostConfiguration.png)
 
 ### 2. Docker Daemon Configuration
 Phần này sẽ kiểm tra Docker’s socket có bị lộ qua một kết nối không an toàn hay không. Lưu lượng mạng giữa các container trên mạng bridge mặc định nên bị hạn chế và loại bỏ registries không an toàn.
 
 Phần này cũng tìm kiếm các đặc quyền không phù hợp cho các containers. Containers không nên có được các đặc quyền mới, vì điều này có thể cho phép kẻ tấn công phát triển vượt quá container.
 
-![Docker Daemon Configuration](images/DockerDaemonConfiguration.png)
+![Docker Daemon Configuration](Images/DockerDaemonConfiguration.png)
 
 ### 3. Docker Daemon Configuration Files
 Các tệp cấu hình Docker Daemon có độ nhạy cảm cao và có thể cho phép kẻ tấn công kiểm soát tất cả các containers trên host.
 
 Phần này bao gồm các quyền hạn và quyền sở hữu các tệp và thư mục liên quan đến Docker. Giữ an toàn cho các tệp và thư mục có thể chứa các tham số nhạy cảm là điều quan trọng để Docker daemon hoạt động chính xác và an toàn.
 
-![Docker Daemon Configuration Files](images/DockerDaemonConfigurationFiles.png)
+![Docker Daemon Configuration Files](Images/DockerDaemonConfigurationFiles.png)
 
 ### 4. Container Images and Build File
-Container base images và build files chi phối các nguyên tắc cơ bản về cách một cá thể container từ một images cụ thể sẽ hoạt động. Đảm bảo rằng ta đang sử dụng base images và các build files thích hợp có thể rất quan trọng để xây dựng cơ sở hạ tầng dựa trên container.
+Container base Images và build files chi phối các nguyên tắc cơ bản về cách một cá thể container từ một Images cụ thể sẽ hoạt động. Đảm bảo rằng ta đang sử dụng base Images và các build files thích hợp có thể rất quan trọng để xây dựng cơ sở hạ tầng dựa trên container.
 
 Docker Bench thực hiện kiểm tra cơ bản các Dockerfiles cho các image hiện có. Nó sẽ tìm kiếm container users chuyên dụng, sự hiện diện của các lệnh HEALTHCHECK và việc sử dụng Content Trust để xác minh tính toàn vẹn của dữ liệu.
 
-Phần kiểm tra này cũng sẽ phát ra các cảnh báo nhắc nhở về các bước làm cứng image cơ bản. Sử dụng base images đáng tin cậy, áp dụng các bản vá bảo mật mới và tránh cài đặt các gói không cần thiết. Các biện pháp này giúp loại bỏ các lỗ hổng bên trong các containers.
+Phần kiểm tra này cũng sẽ phát ra các cảnh báo nhắc nhở về các bước làm cứng image cơ bản. Sử dụng base Images đáng tin cậy, áp dụng các bản vá bảo mật mới và tránh cài đặt các gói không cần thiết. Các biện pháp này giúp loại bỏ các lỗ hổng bên trong các containers.
 
-![Container Images and Build File](images/ContainerImagesandBuildFile.png)
+![Container Images and Build File](Images/ContainerImagesandBuildFile.png)
 
 ### 5. Container Runtime
 Container Runtime sẽ kiểm tra các containers đang hoạt động. Phần này bao gồm hơn 30 bài tests, từ tính khả dụng của SELinux và AppArmor đến việc sử dụng các tùy chọn mạng và mount file system thích hợp.
@@ -90,7 +90,7 @@ Nó cũng xem xét việc sử dụng CPU và giới hạn bộ nhớ. Một con
 
 Và cuối cùng, networking checks sẽ gắn cờ các port không cần thiết trong container.
 
-![Container Runtime](images/ContainerRuntime.png)
+![Container Runtime](Images/ContainerRuntime.png)
 
 ### 6. Docker Security Operations
 Phần này bao gồm một số vấn đề bảo mật hoạt động liên quan đến triển khai Docker. Đây là những phương pháp tốt nhất nên được tuân theo nếu có thể. Hầu hết các đề xuất trong phần này chỉ đóng vai trò là lời nhắc nhở cho các tổ chức nên mở rộng các chính sách và thực tiễn tốt nhất về bảo mật.
@@ -100,7 +100,7 @@ Phần này bao gồm các khuyến nghị bảo mật mà ta nên tuân theo đ
 
 Phần này tập trung vào các điểm yếu trong quá trình kiểm tra bảo mật trên host. Nó sẽ kiểm tra các thư mục Docker, đảm bảo sử dụng phân vùng dành riêng cho containers và đảm bảo cài đặt phiên bản Docker cập nhật.
 
-![Docker Swarm Configuration](images/DockerSwarmConfiguration.png)
+![Docker Swarm Configuration](Images/DockerSwarmConfiguration.png)
 
 ## Tool: https://github.com/docker/docker-bench-security
 ### Cách sử dụng: 
